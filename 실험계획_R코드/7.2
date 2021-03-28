@@ -1,0 +1,15 @@
+a<-c(1,1,2,2, 1,1,2,2)
+b<-c(1,1,1,1, 2,2,2,2)
+y<-c(35,39,101,95, 67,66,34,31)
+
+a<-as.factor(a)
+b<-as.factor(b)
+tapply(y,a,mean);tapply(y,a,sd)
+tapply(y,b,mean);tapply(y,b,sd)
+
+interaction.plot(a,b,y,bty="l")
+L=aov(y~a*b)
+model.tables(L,type="effects") #이게 모수추정
+#추정값은 위의 내용에서 추가로 계산 하여야한다.
+
+summary(L)

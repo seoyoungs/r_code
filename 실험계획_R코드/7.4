@@ -1,0 +1,36 @@
+#7.4
+d2=read.csv(file="C:/Users/김서영/Documents/r프로그램/7.4.csv", header=TRUE)
+d2
+attach(d2)
+a<-as.factor(a)
+b<-as.factor(b)
+rep<-as.factor(rep)
+#각 요인 수준별 평균과 표준편차
+tapply(y,a,mean);tapply(y,a,sd)
+tapply(y,b,mean);tapply(y,b,sd)
+#요인별상자그림
+par(mfrow=c(1,2))
+boxplot(y~a);boxplot(y~b)
+#a,b 상호작용그림
+interaction.plot(a,b,y,bty="l")
+#a,b의 주효과
+L3=aov(y~a*b)
+model.tables(L3,type="effects")
+#분산분석
+anova(L3)
+#모수추정
+model.tables(L3,type="effects")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
