@@ -1,9 +1,9 @@
-# ÆĞÅ°Áö ´Ù¿î·Îµå
+# íŒ¨í‚¤ì§€ ë‹¤ìš´ë¡œë“œ
 
 #install.packages('magrittr')
 suppressMessages(library(magrittr))
 #install.packages('tidymodels')
-# C:\Users\ai\AppData\Local\Temp\Rtmp4AZMmv\downloaded_packages ¿©±â¿¡ ÀúÀå
+# C:\Users\ai\AppData\Local\Temp\Rtmp4AZMmv\downloaded_packages ì—¬ê¸°ì— ì €ì¥
 # install.packages("tidyverse")
 # install.packages("skimr")
 # install.packages("knitr")
@@ -13,12 +13,12 @@ suppressMessages(library(skimr)) %>% suppressWarnings()
 suppressMessages(library(knitr)) %>% suppressWarnings()
 theme_set(theme_bw())
 
-# µ¥ÀÌÅÍ¼Â ºÒ·¯¿À±â
+# ë°ì´í„°ì…‹ ë¶ˆëŸ¬ì˜¤ê¸°
 file_path <- "C:/data/dacon_data/cradit"
 files <- list.files(file_path)
 files
 
-# °¢ csv º¯¼ö °¢ º¯¼öÀÇ ÀÌ¸§À» janitor ÆĞÅ°Áö·Î ¸»²ûÇÏ°Ô ¹Ù²ãÁØ´Ù.
+# ê° csv ë³€ìˆ˜ ê° ë³€ìˆ˜ì˜ ì´ë¦„ì„ janitor íŒ¨í‚¤ì§€ë¡œ ë§ë”í•˜ê²Œ ë°”ê¿”ì¤€ë‹¤.
 # install.packages("janitor")
 train <- read_csv(file.path(file_path, "train.csv"),
                   col_types = cols(
@@ -30,25 +30,25 @@ test <- read_csv(file.path(file_path, "test.csv")) %T>%
   suppressMessages() %>% 
   janitor::clean_names()
 
-# µ¥ÀÌÅÍ ±âº»Á¤º¸ È®ÀÎ
+# ë°ì´í„° ê¸°ë³¸ì •ë³´ í™•ì¸
 train %>% 
   head()
-dim(train) # Ä®·³ Á¤º¸ ÃßÃâ
+dim(train) # ì¹¼ëŸ¼ ì •ë³´ ì¶”ì¶œ
 names(train)
-skim(train) # µ¥ÀÌÅÍ¸¦ ÈÈ¾îº¸±â À§ÇØ¼­ skim() ÇÔ¼ö
+skim(train) # ë°ì´í„°ë¥¼ í›‘ì–´ë³´ê¸° ìœ„í•´ì„œ skim() í•¨ìˆ˜
 skim(test)
 
-# ½Ã°¢È­
+# ì‹œê°í™”
 train %>%
   ggplot(aes(x = factor(credit), y = income_total)) +
   geom_boxplot() +
   facet_grid(. ~ income_type)
 
-# ÀüÃ³¸® ÇÏ±â
-# tidymodels¿¡¼­´Â ÀüÃ³¸®¸¦ ÇÒ ¶§ recipe ¶ó´Â ÆĞÅ°Áö¸¦ »ç¿ëÇÑ´Ù. 
-# ÀÌ ÆĞÅ°Áö¿¡´Â ÀüÃ³¸®¸¦ ÇÏ´Â ¹æ¹ıÀ» À½½Ä ·¹ÇÇ½Ã Ã³·³ Àû¾î³õ´Â´Ù°í »ı°¢ÇÏ¸é ½±´Ù.
-# °á°ú°ªÀÎ credit º¯¼ö¿Í character Å¸ÀÔÀÇ º¯¼öµéÀ» factor º¯¼ö·Î ¹Ù²ã
-# ³ªÀÌ¿Í Á÷¾÷À» °¡Áø ±â°£À» ³â¼ö
+# ì „ì²˜ë¦¬ í•˜ê¸°
+# tidymodelsì—ì„œëŠ” ì „ì²˜ë¦¬ë¥¼ í•  ë•Œ recipe ë¼ëŠ” íŒ¨í‚¤ì§€ë¥¼ ì‚¬ìš©í•œë‹¤. 
+# ì´ íŒ¨í‚¤ì§€ì—ëŠ” ì „ì²˜ë¦¬ë¥¼ í•˜ëŠ” ë°©ë²•ì„ ìŒì‹ ë ˆí”¼ì‹œ ì²˜ëŸ¼ ì ì–´ë†“ëŠ”ë‹¤ê³  ìƒê°í•˜ë©´ ì‰½ë‹¤.
+# ê²°ê³¼ê°’ì¸ credit ë³€ìˆ˜ì™€ character íƒ€ì…ì˜ ë³€ìˆ˜ë“¤ì„ factor ë³€ìˆ˜ë¡œ ë°”ê¿”
+# ë‚˜ì´ì™€ ì§ì—…ì„ ê°€ì§„ ê¸°ê°„ì„ ë…„ìˆ˜
 # install.packages("recipe")
 
 credit_recipe <- train %>% 
@@ -64,8 +64,8 @@ credit_recipe <- train %>%
 
 print(credit_recipe)
 
-# juice¸¦ ÅëÇÑ ÀüÃ³¸® ÁóÂ¥±â
-# juice() ÇÔ¼ö¸¦ ÅëÇØ¼­ recipe¿¡ ÀÔ·ÂµÈ ÀüÃ³¸®¸¦ Â¥³½ µ¥ÀÌÅÍ¸¦ ¾ò¾î¿Â´Ù.
+# juiceë¥¼ í†µí•œ ì „ì²˜ë¦¬ ì¦™ì§œê¸°
+# juice() í•¨ìˆ˜ë¥¼ í†µí•´ì„œ recipeì— ì…ë ¥ëœ ì „ì²˜ë¦¬ë¥¼ ì§œë‚¸ ë°ì´í„°ë¥¼ ì–»ì–´ì˜¨ë‹¤.
 train2 <- juice(credit_recipe)
 test2 <- bake(credit_recipe, new_data = test)
 head(train2)
@@ -78,13 +78,13 @@ map_df(~sum(is.na(.))) %>%
        values_to = "na_count") %>% 
   filter(na_count > 0)
 
-# Æ©´× ÁØºñÇÏ±â
-# validation_split() ÇÔ¼ö¸¦ »ç¿ëÇÏ¿© Æò°¡¼ÂÀ» ºĞ¸®
+# íŠœë‹ ì¤€ë¹„í•˜ê¸°
+# validation_split() í•¨ìˆ˜ë¥¼ ì‚¬ìš©í•˜ì—¬ í‰ê°€ì…‹ì„ ë¶„ë¦¬
 set.seed(2021)
 
 validation_split <- validation_split(train2, prop = 0.7, 
                                      strata = credit)
-# Æ©´× ½ºÆå ¼³Á¤
+# íŠœë‹ ìŠ¤í™ ì„¤ì •
 cores <- parallel::detectCores() -1
 cores
 
@@ -101,12 +101,12 @@ tune_spec <- rand_forest(mtry = tune(),
 # from param tune
 param_grid <- tibble(mtry = 3, min_n = 5)
 
-# ¿öÅ© ÇÃ·Î¿ì ¼³Á¤
+# ì›Œí¬ í”Œë¡œìš° ì„¤ì •
 workflow <- workflow() %>%
   add_model(tune_spec) %>% 
   add_formula(credit ~ .)
 
-# ¸ğµ¨ Æ©´× with tune_grid()
+# ëª¨ë¸ íŠœë‹ with tune_grid()
 # install.packages("tictoc")
 # install.packages('ranger')
 library(tictoc)
@@ -121,7 +121,7 @@ tune_result$.notes[[1]]$.notes
 tune_result %>% 
   collect_metrics()
 
-# Æ©´×°á°ú ½Ã°¢È­
+# íŠœë‹ê²°ê³¼ ì‹œê°í™”
 tune_result %>%
   collect_metrics() %>%
   filter(.metric == "mn_log_loss") %>% 
@@ -136,7 +136,7 @@ tune_best <- tune_result %>% select_best(metric = "mn_log_loss")
 tune_best$mtry
 tune_best$min_n
 
-# ==== Æ©´×µÈ ¸ğµ¨ ÇĞ½ÀÇÏ±â
+# ==== íŠœë‹ëœ ëª¨ë¸ í•™ìŠµí•˜ê¸°
 rf_model <- 
   rand_forest(mtry = tune_best$mtry,
               min_n = tune_best$min_n,
@@ -154,7 +154,7 @@ tictoc::toc()
 options(max.print = 10)
 rf_fit
 
-# ===== ¿¹ÃøÇÏ±â
+# ===== ì˜ˆì¸¡í•˜ê¸°
 result <- predict(rf_fit, test2, type = "prob")
 result %>% head()
 submission <- read_csv(file.path(file_path, "sample_submission.csv"))
@@ -163,27 +163,4 @@ submission <- bind_cols(submission$index, result)
 names(submission) <- sub_col
 write.csv(submission, row.names = FALSE,
           "C:/data/dacon_data/cradit/baseline_dacon_credit.csv")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
